@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zona Telur - Telur Asin dan Telur Pindang Otentik</title>
+  <meta name="description" content="Zona Telur menjual telur asin, telur pindang, dan telur mentah di Narmada, Lombok. Pesan online lewat WhatsApp.">
+  <link rel="icon" type="image/png" href="Assets/favicon.png">
+
+  <!-- Font Google: Baloo 2 (judul) dan DM Sans (isi) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ========== BAR ATAS ========== -->
+  <div class="pengumuman"> Pesan lewat WhatsApp &middot; Telur asin dan pindang siap santap</div>
+
+  <div class="topbar">
+    <div> ZONA TELUR </div>
+    <div class="topbar-kanan">
+      <a href="https://wa.me/6289529399731" target="_blank" rel="noopener">☎ 0895-2939-9731</a>
+      <a href="https://instagram.com/zona.telur" target="_blank" rel="noopener">📷 @zona.telur</a>
+    </div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <a href="#beranda" class="brand" aria-label="Zona Telur, ke beranda">
+      <img src="Assets/logo.png" alt="Logo Zona Telur" width="56" height="56">
+      <span class="brand-teks">ZONA TELUR<small>Asin &amp; Pindang Otentik</small></span>
+    </a>
+
+    <button class="tombol-menu" id="tombolMenu" aria-label="Buka menu navigasi">☰</button>
+
+    <nav id="navigasi">
+      <a href="#beranda">BERANDA</a>
+      <a href="#menu">MENU</a>
+      <a href="#cara-pesan">CARA PESAN</a>
+      <a href="#tentang">TENTANG</a>
+      <a href="#lokasi">LOKASI</a>
+    </nav>
+
+    <button class="tombol-keranjang" id="tombolKeranjang" aria-label="Buka keranjang">
+      🧺 Keranjang <span class="jumlah-keranjang" id="jumlahKeranjang">0</span>
+    </button>
+  </header>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="beranda">
+      <div class="hero-teks">
+        <div class="label">Dari Narmada, Lombok</div>
+        <h1>Telur asin &amp; pindang <em>otentik</em>, siap santap.</h1>
+        <p>Gurih, bumbunya meresap, dikemas praktis dalam mika. Cocok untuk lauk sehari-hari,
+           bekal, maupun acara keluarga. Pesan lewat web, selesai di WhatsApp.</p>
+
+        <div class="hero-tombol">
+          <a class="tombol" href="#menu">PESAN SEKARANG</a>
+          <a class="tombol garis" href="#lokasi">HUBUNGI KAMI</a>
+        </div>
+
+        <ul class="hero-fakta">
+          <li><strong>3 butir</strong><span>per mika</span></li>
+          <li><strong>QRIS &amp; Tunai</strong><span>pembayaran</span></li>
+          <li><strong>Pre-order</strong><span>jumlah besar</span></li>
+        </ul>
+      </div>
+
+      <div class="hero-gambar" aria-hidden="true">
+        <img class="gambar-logo" src="Assets/logo.png" alt="">
+        <img class="foto foto-pindang" src="Assets/telur-pindang.jpg" alt="">
+        <img class="foto foto-asin" src="Assets/telur-asin.jpg" alt="">
+      </div>
+    </section>
+
+    <!-- ========== MENU ========== -->
+    <section class="seksi-menu" id="menu">
+      <div class="judul-seksi">
+        <div class="label">Pilihan kami</div>
+        <h2>Menu Zona Telur</h2>
+        <p>Pilih jumlahnya, masukkan ke keranjang, lalu kirim pesanan ke WhatsApp kami.</p>
+      </div>
+
+      <div class="grid-menu">
+
+        <!-- Kartu 1: Telur Pindang -->
+        <article class="kartu-menu" data-id="pindang" data-nama="Telur Pindang" data-harga="12000" data-satuan="mika" data-gambar="Assets/telur-pindang.jpg">
+          <div class="menu-foto">
+            <img src="Assets/telur-pindang.jpg" alt="Telur pindang">
+            <span class="lencana">Favorit</span>
+          </div>
+          <div class="menu-isi">
+            <h3>Telur Pindang</h3>
+            <p>Bumbu meresap hingga ke dalam, gurih dan wangi rempah. Mika isi 3 butir.</p>
+            <div class="harga">Rp12.000 <small>/ mika</small></div>
+            <div class="menu-aksi">
+              <div class="qty">
+                <button type="button" class="kurang" aria-label="Kurangi">−</button>
+                <span class="angka">1</span>
+                <button type="button" class="tambah" aria-label="Tambah">+</button>
+              </div>
+              <button type="button" class="tombol masuk-keranjang">+ KERANJANG</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Kartu 2: Telur Asin -->
+        <article class="kartu-menu" data-id="asin" data-nama="Telur Asin" data-harga="13000" data-satuan="mika" data-gambar="Assets/telur-asin.jpg">
+          <div class="menu-foto">
+            <img src="Assets/telur-asin.jpg" alt="Telur asin">
+          </div>
+          <div class="menu-isi">
+            <h3>Telur Asin</h3>
+            <p>Asin gurih merata dengan kuning telur berminyak. Mika isi 3 butir.</p>
+            <div class="harga">Rp13.000 <small>/ mika</small></div>
+            <div class="menu-aksi">
+              <div class="qty">
+                <button type="button" class="kurang" aria-label="Kurangi">−</button>
+                <span class="angka">1</span>
+                <button type="button" class="tambah" aria-label="Tambah">+</button>
+              </div>
+              <button type="button" class="tombol masuk-keranjang">+ KERANJANG</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Kartu 3: Telur Mentah -->
+        <article class="kartu-menu" data-id="mentah" data-nama="Telur Mentah" data-harga="50000" data-satuan="butir" data-gambar="Assets/telur-mentah.jpg">
+          <div class="menu-foto">
+            <img class="isi-penuh" src="Assets/telur-mentah.jpg" alt="Telur mentah dalam tray">
+          </div>
+          <div class="menu-isi">
+            <h3>Telur Mentah</h3>
+            <p>Telur ayam segar untuk kebutuhan dapur, kue, atau usaha kuliner.</p>
+            <div class="harga">Rp50.000 <small>/ butir</small></div>
+            <div class="menu-aksi">
+              <div class="qty">
+                <button type="button" class="kurang" aria-label="Kurangi">−</button>
+                <span class="angka">1</span>
+                <button type="button" class="tambah" aria-label="Tambah">+</button>
+              </div>
+              <button type="button" class="tombol masuk-keranjang">+ KERANJANG</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== CARA PESAN ========== -->
+    <section class="seksi-langkah" id="cara-pesan">
+      <div class="judul-seksi">
+        <div class="label">Mudah dan cepat</div>
+        <h2>Cara Memesan</h2>
+      </div>
+
+      <ol class="langkah">
+        <li><span>1</span><h3>Pilih produk</h3><p>Tentukan telur pindang, telur asin, atau telur mentah dan jumlahnya.</p></li>
+        <li><span>2</span><h3>Isi data pesanan</h3><p>Nama, nomor WhatsApp, ambil atau antar, dan metode pembayaran.</p></li>
+        <li><span>3</span><h3>Kirim ke WhatsApp</h3><p>Pesanan tersusun otomatis di chat. Tinggal tekan kirim.</p></li>
+        <li><span>4</span><h3>Konfirmasi &amp; bayar</h3><p>Admin konfirmasi stok dan total. Bayar via QRIS atau tunai.</p></li>
+        <li><span>5</span><h3>Terima pesanan</h3><p>Ambil di tempat atau diantar sesuai pilihanmu.</p></li>
+      </ol>
+    </section>
+
+    <!-- ========== TENTANG ========== -->
+    <section class="seksi-tentang" id="tentang">
+      <div class="tentang-foto">
+        <img src="Assets/telur-asin.jpg" alt="Telur asin Zona Telur dalam bakul bambu">
+        <img src="Assets/telur-pindang.jpg" alt="Telur pindang Zona Telur dalam bakul bambu">
+      </div>
+
+      <div class="tentang-isi">
+        <div class="label">Cerita kami</div>
+        <h2>Telur olahan yang dibuat dengan rasa otentik</h2>
+        <p>Zona Telur adalah usaha telur olahan dari Narmada, Lombok. Kami mengolah telur menjadi
+           telur asin yang gurih dan telur pindang yang bumbunya meresap, lalu mengemasnya dalam
+           mika agar praktis dibawa dan dibagikan.</p>
+        <p>Cukup pesan lewat web atau WhatsApp, pesanan langsung kami siapkan.</p>
+
+        <ul class="keunggulan">
+          <li><b>Bumbu meresap</b><span>Pindang gurih hingga ke dalam.</span></li>
+          <li><b>Kemasan praktis</b><span>Mika isi 3 butir, siap dibawa.</span></li>
+          <li><b>Harga terjangkau</b><span>Mulai Rp12.000 per mika.</span></li>
+          <li><b>Produk lokal</b><span>Dibuat dan dilayani dari Lombok.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== LOKASI / KONTAK ========== -->
+    <section class="seksi-lokasi" id="lokasi">
+      <div class="judul-seksi">
+        <div class="label">Hubungi kami</div>
+        <h2>Pesan &amp; Tanya Langsung</h2>
+        <p>Untuk pre-order jumlah besar, pertanyaan produk, atau pengantaran, chat kami kapan saja.</p>
+      </div>
+
+      <div class="kotak-lokasi">
+        <img src="Assets/logo.png" alt="" class="logo-lokasi">
+        <div>
+          <h3>Zona Telur</h3>
+          <p>📍 Narmada, Lombok<br>
+             🕒 Chat kami kapan saja<br>
+             ☎ WhatsApp 0895-2939-9731<br>
+             📷 Instagram @zona.telur</p>
+          <div class="lokasi-tombol">
+            <a class="tombol" href="https://wa.me/6289529399731" target="_blank" rel="noopener">CHAT WHATSAPP</a>
+            <a class="tombol garis" href="https://instagram.com/zona.telur" target="_blank" rel="noopener">INSTAGRAM</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-brand">
+      <img src="Assets/logo.png" alt="" width="44" height="44">
+      <div><strong>ZONA TELUR</strong><span>Telur Asin dan Telur Pindang Otentik</span></div>
+    </div>
+    <p>&copy; <span id="tahun">2026</span> Zona Telur, Narmada, Lombok.</p>
+  </footer>
+
+  <!-- ========== KERANJANG (panel geser) ========== -->
+  <div class="gelap" id="gelap" hidden></div>
+
+  <aside class="keranjang" id="keranjang" aria-hidden="true" aria-label="Keranjang belanja">
+    <div class="keranjang-kepala">
+      <h2>Keranjang</h2>
+      <button type="button" class="tombol-tutup" id="tutupKeranjang" aria-label="Tutup keranjang">✕</button>
+    </div>
+
+    <div class="keranjang-isi">
+      <!-- Daftar barang diisi oleh script.js -->
+      <div id="daftarBarang"></div>
+
+      <form id="formPesan" class="form-pesan" novalidate>
+        <div class="total"><span>Total</span><strong id="totalHarga">Rp0</strong></div>
+
+        <label>Nama
+          <input type="text" id="nama" autocomplete="name" required>
+        </label>
+
+        <label>Nomor WhatsApp
+          <input type="tel" id="telepon" autocomplete="tel" inputmode="tel" placeholder="08xxxxxxxxxx" required>
+        </label>
+
+        <fieldset>
+          <legend>Pengambilan</legend>
+          <label class="pilihan"><input type="radio" name="ambil" value="Ambil sendiri" checked> Ambil sendiri</label>
+          <label class="pilihan"><input type="radio" name="ambil" value="Diantar"> Diantar</label>
+        </fieldset>
+
+        <label id="barisAlamat" hidden>Alamat pengantaran
+          <textarea id="alamat" rows="2" placeholder="Alamat lengkap. Ongkir dikonfirmasi admin."></textarea>
+        </label>
+
+        <fieldset>
+          <legend>Pembayaran</legend>
+          <label class="pilihan"><input type="radio" name="bayar" value="QRIS" checked> QRIS</label>
+          <label class="pilihan"><input type="radio" name="bayar" value="Tunai"> Tunai</label>
+        </fieldset>
+
+        <label>Catatan
+          <textarea id="catatan" rows="2" placeholder="Contoh: pre-order untuk hari Sabtu"></textarea>
+        </label>
+
+        <p class="pesan-error" id="pesanError" role="alert"></p>
+        <button type="submit" class="tombol lebar">KIRIM PESANAN VIA WHATSAPP</button>
+        <p class="petunjuk">Pesanan dianggap pasti setelah dikonfirmasi admin di WhatsApp.</p>
+      </form>
+    </div>
+  </aside>
+
+  <!-- Notifikasi kecil di bawah layar -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

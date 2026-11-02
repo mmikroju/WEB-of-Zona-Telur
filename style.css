@@ -1,0 +1,999 @@
+/* =========================================================
+   Zona Telur - style.css
+   Isi: variabel warna, reset, bar atas, header, tombol, hero,
+        menu, cara pesan, tentang, lokasi, footer, keranjang,
+        responsif
+   ========================================================= */
+
+/* ---------- 1. Variabel warna (mudah diganti) ---------- */
+:root {
+  --krem: #fff7e8;
+  --krem-tua: #f7e8c8;
+  --kartu: #fffcf5;
+  --cokelat: #7a3e17;
+  --gelap: #3b2415;
+  --oranye: #e8943a;
+  --merah: #d9402b;
+  --teks: #3b2415;
+  --teks-lembut: #6f5642;
+  --garis: #ead9b5;
+  --bayang: 0 12px 30px rgba(91, 52, 20, 0.16);
+}
+
+/* ---------- 2. Reset dan dasar ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px; /* supaya judul tidak tertutup header */
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: var(--teks);
+  background: var(--krem);
+  line-height: 1.65;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3 {
+  font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+}
+
+a {
+  color: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Garis fokus untuk pengguna keyboard */
+:focus-visible {
+  outline: 3px solid var(--oranye);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---------- 3. Bar atas ---------- */
+.pengumuman {
+  background: var(--merah);
+  color: #fff;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--gelap);
+  color: #f5e6cc;
+  font-size: 0.82rem;
+  padding: 0.45rem 5vw;
+}
+
+.topbar-kanan {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.topbar a {
+  text-decoration: none;
+}
+
+.topbar a:hover {
+  color: var(--oranye);
+}
+
+/* ---------- 4. Header dan navigasi ---------- */
+header {
+  position: sticky;   /* menempel di atas saat di-scroll */
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.7rem 5vw;
+  background: rgba(255, 247, 232, 0.95);
+  border-bottom: 1px solid var(--garis);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.brand img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+
+.brand-teks {
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--cokelat);
+  line-height: 1;
+}
+
+.brand-teks small {
+  display: block;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teks-lembut);
+  margin-top: 4px;
+}
+
+nav {
+  display: flex;
+  gap: 1.6rem;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+/* Status link: hover dan focus-visible */
+nav a:hover,
+nav a:focus-visible {
+  color: var(--cokelat);
+  border-bottom-color: var(--oranye);
+}
+
+.tombol-menu {
+  display: none; /* hanya tampil di HP */
+  background: none;
+  border: 1px solid var(--garis);
+  border-radius: 10px;
+  font-size: 1.3rem;
+  padding: 0.3rem 0.7rem;
+  color: var(--cokelat);
+  cursor: pointer;
+}
+
+.tombol-keranjang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--cokelat);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  font: 700 0.88rem "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tombol-keranjang:hover {
+  background: var(--gelap);
+}
+
+.jumlah-keranjang {
+  background: var(--oranye);
+  color: var(--gelap);
+  border-radius: 999px;
+  min-width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.78rem;
+  padding: 0 0.35rem;
+}
+
+/* ---------- 5. Tombol umum ---------- */
+.tombol {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  background: var(--cokelat);
+  color: #fff;
+  border: 2px solid var(--cokelat);
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  font: 800 0.85rem "DM Sans", sans-serif;
+  letter-spacing: 0.08em;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+}
+
+.tombol:hover,
+.tombol:focus-visible {
+  background: var(--gelap);
+  border-color: var(--gelap);
+  transform: translateY(-2px);
+}
+
+.tombol.garis {
+  background: transparent;
+  color: var(--cokelat);
+}
+
+.tombol.garis:hover,
+.tombol.garis:focus-visible {
+  background: var(--cokelat);
+  border-color: var(--cokelat);
+  color: #fff;
+}
+
+.tombol.lebar {
+  width: 100%;
+}
+
+/* ---------- 6. Bagian umum ---------- */
+main > section {
+  padding: 5rem 5vw;
+}
+
+.judul-seksi {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto 2.6rem;
+}
+
+.judul-seksi h2 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+}
+
+.judul-seksi p {
+  color: var(--teks-lembut);
+  margin: 0;
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--merah);
+  margin-bottom: 0.6rem;
+}
+
+/* ---------- 7. Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr; /* dua kolom: teks dan gambar */
+  gap: 3rem;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  min-height: 600px;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  color: var(--gelap);
+  margin-bottom: 1rem;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--merah);
+}
+
+.hero-teks > p {
+  font-size: 1.08rem;
+  color: var(--teks-lembut);
+  max-width: 520px;
+}
+
+.hero-tombol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 1.6rem 0 2rem;
+}
+
+.hero-fakta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-fakta li {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid var(--oranye);
+  padding-left: 0.8rem;
+}
+
+.hero-fakta strong {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.1rem;
+  color: var(--cokelat);
+  line-height: 1.2;
+}
+
+.hero-fakta span {
+  font-size: 0.8rem;
+  color: var(--teks-lembut);
+}
+
+/* Gambar hero: logo di tengah, dua foto melayang di sudut */
+.hero-gambar {
+  position: relative;
+  height: 480px;
+}
+
+.hero-gambar::before {
+  content: "";
+  position: absolute;
+  inset: 6% 4%;
+  background: var(--krem-tua);
+  border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%;
+}
+
+.gambar-logo {
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 50%;
+  border: 8px solid var(--kartu);
+  box-shadow: var(--bayang);
+  object-fit: cover;
+}
+
+.foto {
+  position: absolute;
+  z-index: 3;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 6px solid var(--kartu);
+  box-shadow: var(--bayang);
+  animation: apung 6s ease-in-out infinite;
+}
+
+.foto-pindang {
+  width: 190px;
+  height: 190px;
+  top: 2%;
+  right: 2%;
+}
+
+.foto-asin {
+  width: 250px;
+  height: 160px;
+  bottom: 3%;
+  left: 0;
+  animation-delay: -3s;
+}
+
+@keyframes apung {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-12px) rotate(2deg); }
+}
+
+/* ---------- 8. Menu ---------- */
+.seksi-menu {
+  background: var(--kartu);
+  border-top: 1px solid var(--garis);
+  border-bottom: 1px solid var(--garis);
+}
+
+.grid-menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* tiga kartu sejajar */
+  gap: 1.6rem;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.kartu-menu {
+  display: flex;
+  flex-direction: column;
+  background: var(--krem);
+  border: 1px solid var(--garis);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.kartu-menu:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--bayang);
+}
+
+.menu-foto {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--krem-tua);
+}
+
+.menu-foto img {
+  position: absolute; /* foto mengisi penuh bingkai 4:3 */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-foto img.isi-penuh {
+  object-fit: contain;
+  padding: 1rem;
+  background: #fff;
+}
+
+.lencana {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  background: var(--merah);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+}
+
+.menu-isi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  padding: 1.3rem 1.4rem 1.5rem;
+}
+
+.menu-isi h3 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.menu-isi p {
+  flex: 1;
+  margin: 0;
+  color: var(--teks-lembut);
+  font-size: 0.93rem;
+}
+
+.harga {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--cokelat);
+  margin-top: 0.5rem;
+}
+
+.harga small {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--teks-lembut);
+}
+
+.menu-aksi {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.6rem;
+}
+
+.menu-aksi .tombol {
+  flex: 1;
+  padding-inline: 1rem;
+}
+
+/* Pengatur jumlah  - 1 + */
+.qty {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  border: 1.5px solid var(--garis);
+  border-radius: 999px;
+}
+
+.qty button {
+  width: 34px;
+  height: 36px;
+  border: 0;
+  background: none;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--cokelat);
+  cursor: pointer;
+}
+
+.qty button:hover {
+  background: var(--krem-tua);
+}
+
+.qty span {
+  min-width: 26px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* ---------- 9. Cara pesan ---------- */
+.langkah {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.2rem;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.langkah li {
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 18px;
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  transition: transform 0.25s;
+}
+
+.langkah li:hover {
+  transform: translateY(-4px);
+}
+
+.langkah span {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 0.7rem;
+  border-radius: 50%;
+  background: var(--oranye);
+  color: var(--gelap);
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.langkah h3 {
+  font-size: 1.1rem;
+}
+
+.langkah p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--teks-lembut);
+}
+
+/* ---------- 10. Tentang ---------- */
+.seksi-tentang {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.tentang-foto {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.tentang-foto img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: var(--bayang);
+}
+
+.tentang-foto img:last-child {
+  margin-top: 2.5rem; /* foto kedua lebih turun */
+}
+
+.tentang-isi h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+}
+
+.tentang-isi > p {
+  color: var(--teks-lembut);
+}
+
+.keunggulan {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.keunggulan li {
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+}
+
+.keunggulan b {
+  display: block;
+  color: var(--cokelat);
+}
+
+.keunggulan span {
+  font-size: 0.85rem;
+  color: var(--teks-lembut);
+}
+
+/* ---------- 11. Lokasi ---------- */
+.seksi-lokasi {
+  background: var(--krem-tua);
+}
+
+.kotak-lokasi {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 24px;
+  box-shadow: var(--bayang);
+}
+
+.logo-lokasi {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kotak-lokasi h3 {
+  font-size: 1.7rem;
+}
+
+.kotak-lokasi p {
+  margin: 0 0 1rem;
+  color: var(--teks-lembut);
+}
+
+.lokasi-tombol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+/* ---------- 12. Footer ---------- */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 2rem 5vw;
+  background: var(--gelap);
+  color: #e9d6b8;
+  font-size: 0.88rem;
+}
+
+footer p {
+  margin: 0;
+  color: #b89b74;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.footer-brand img {
+  border-radius: 50%;
+}
+
+.footer-brand strong {
+  display: block;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.15rem;
+  color: #fff;
+  line-height: 1.1;
+}
+
+/* ---------- 13. Keranjang (panel geser dari kanan) ---------- */
+.gelap {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(30, 15, 5, 0.5);
+}
+
+.keranjang {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  width: min(440px, 100%);
+  display: flex;
+  flex-direction: column;
+  background: var(--krem);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.25);
+  transform: translateX(100%); /* tersembunyi di kanan layar */
+  visibility: hidden;
+  transition: transform 0.3s ease;
+}
+
+.keranjang.buka {
+  transform: none;
+  visibility: visible;
+}
+
+.keranjang-kepala {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.3rem;
+  border-bottom: 1px solid var(--garis);
+}
+
+.keranjang-kepala h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.tombol-tutup {
+  width: 38px;
+  height: 38px;
+  background: none;
+  border: 1px solid var(--garis);
+  border-radius: 50%;
+  color: var(--cokelat);
+  cursor: pointer;
+}
+
+.tombol-tutup:hover {
+  background: var(--krem-tua);
+}
+
+.keranjang-isi {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.3rem 2rem;
+}
+
+.kosong {
+  text-align: center;
+  color: var(--teks-lembut);
+  padding: 2rem 0;
+}
+
+.barang {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--garis);
+}
+
+.barang img {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #fff;
+}
+
+.barang b {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.barang small {
+  color: var(--teks-lembut);
+}
+
+/* Form pemesanan */
+.form-pesan {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.2rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 1.1rem;
+}
+
+.total strong {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.7rem;
+  color: var(--cokelat);
+}
+
+.form-pesan label {
+  display: grid;
+  gap: 0.3rem;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.form-pesan input[type="text"],
+.form-pesan input[type="tel"],
+.form-pesan textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  background: #fff;
+  color: var(--teks);
+  border: 1.5px solid var(--garis);
+  border-radius: 12px;
+  font: 400 1rem "DM Sans", sans-serif;
+}
+
+.form-pesan input:hover,
+.form-pesan textarea:hover {
+  border-color: var(--oranye);
+}
+
+.form-pesan fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  margin: 0;
+  padding: 0.5rem 0.9rem 0.7rem;
+  border: 1.5px solid var(--garis);
+  border-radius: 12px;
+}
+
+.form-pesan legend {
+  padding: 0 0.4rem;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.form-pesan .pilihan {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.form-pesan input.salah,
+.form-pesan textarea.salah {
+  border-color: var(--merah);
+}
+
+.pesan-error {
+  min-height: 1.2em;
+  margin: 0;
+  color: var(--merah);
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.petunjuk {
+  margin: 0;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--teks-lembut);
+}
+
+/* Notifikasi kecil */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 90;
+  transform: translate(-50%, 140%); /* di luar layar */
+  background: var(--gelap);
+  color: #fff;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: transform 0.3s;
+}
+
+.toast.tampil {
+  transform: translate(-50%, 0);
+}
+
+/* Hormati pengguna yang mematikan animasi */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- 14. Responsif ---------- */
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .langkah { grid-template-columns: repeat(3, 1fr); }
+  .grid-menu { grid-template-columns: 1fr 1fr; }
+}
+
+/* Tablet kecil dan HP */
+@media (max-width: 860px) {
+  main > section { padding: 3.5rem 5vw; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    min-height: 0;
+    text-align: center;
+  }
+  .hero-teks > p { margin-inline: auto; }
+  .hero-tombol,
+  .hero-fakta { justify-content: center; }
+  .hero-fakta li { text-align: left; }
+  .hero-gambar { height: 400px; max-width: 460px; width: 100%; margin: 0 auto; }
+  .gambar-logo { width: 220px; height: 220px; }
+  .foto-pindang { width: 150px; height: 150px; }
+  .foto-asin { width: 190px; height: 125px; }
+
+  .seksi-tentang { grid-template-columns: 1fr; }
+
+  /* Menu navigasi jadi tombol hamburger */
+  .tombol-menu { display: block; }
+  header { flex-wrap: wrap; gap: 0.8rem; }
+  nav {
+    display: none;
+    order: 5;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+  nav.buka { display: flex; }
+  nav a {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--garis);
+  }
+}
+
+/* HP */
+@media (max-width: 600px) {
+  .topbar { justify-content: center; text-align: center; }
+  .grid-menu,
+  .langkah,
+  .keunggulan { grid-template-columns: 1fr; }
+  .tentang-foto img { height: 220px; }
+  .kotak-lokasi { flex-direction: column; text-align: center; }
+  .lokasi-tombol { justify-content: center; }
+  .tombol-keranjang { padding: 0.55rem 0.9rem; }
+  footer { justify-content: center; text-align: center; }
+}
