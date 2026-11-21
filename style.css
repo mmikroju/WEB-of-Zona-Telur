@@ -997,3 +997,289 @@ footer p {
   .tombol-keranjang { padding: 0.55rem 0.9rem; }
   footer { justify-content: center; text-align: center; }
 }
+
+/* =========================================================
+   15. Akun: login, daftar, panel admin
+   ========================================================= */
+.akun {
+  position: relative;
+}
+
+.tombol-masuk {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: var(--cokelat);
+  border: 2px solid var(--cokelat);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font: 700 0.88rem "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tombol-masuk:hover {
+  background: var(--cokelat);
+  color: #fff;
+}
+
+.akun-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--kartu);
+  border: 1.5px solid var(--garis);
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem 0.25rem 0.3rem;
+  font: 700 0.86rem "DM Sans", sans-serif;
+  color: var(--teks);
+  cursor: pointer;
+}
+
+.akun-chip:hover {
+  border-color: var(--oranye);
+}
+
+.akun-avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--oranye);
+  color: var(--gelap);
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.akun-nama {
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lencana-peran {
+  background: var(--cokelat);
+  color: #fff;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.lencana-peran.admin {
+  background: var(--merah);
+}
+
+.akun-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 50;
+  min-width: 180px;
+  display: grid;
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  box-shadow: var(--bayang);
+  overflow: hidden;
+}
+
+.akun-dropdown button {
+  background: none;
+  border: 0;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font: 600 0.92rem "DM Sans", sans-serif;
+  color: var(--teks);
+  cursor: pointer;
+}
+
+.akun-dropdown a {
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  font: 600 0.92rem "DM Sans", sans-serif;
+  color: var(--teks);
+}
+
+.akun-dropdown a:hover,
+.akun-dropdown button:hover {
+  background: var(--krem-tua);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(30, 15, 5, 0.55);
+  overflow-y: auto;
+}
+
+.modal-kotak {
+  position: relative;
+  width: min(430px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  background: var(--krem);
+  border-radius: 22px;
+  padding: 2rem 1.6rem 1.6rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.modal-kotak h2 {
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.modal-tutup {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+}
+
+.modal-logo {
+  margin: 0 auto 0.5rem;
+  border-radius: 50%;
+}
+
+.tab-auth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem;
+  margin: 1rem 0 1.2rem;
+  padding: 0.25rem;
+  background: var(--krem-tua);
+  border-radius: 999px;
+}
+
+.tab-auth button {
+  border: 0;
+  background: none;
+  padding: 0.55rem;
+  border-radius: 999px;
+  font: 700 0.88rem "DM Sans", sans-serif;
+  color: var(--teks-lembut);
+  cursor: pointer;
+}
+
+.tab-auth button.aktif {
+  background: var(--cokelat);
+  color: #fff;
+}
+
+.form-auth {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.form-auth label {
+  display: grid;
+  gap: 0.3rem;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.form-auth input[type="text"],
+.form-auth input[type="email"],
+.form-auth input[type="tel"],
+.form-auth input[type="password"] {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  background: #fff;
+  color: var(--teks);
+  border: 1.5px solid var(--garis);
+  border-radius: 12px;
+  font: 400 1rem "DM Sans", sans-serif;
+}
+
+.form-auth input:hover {
+  border-color: var(--oranye);
+}
+
+.form-auth input.salah {
+  border-color: var(--merah);
+}
+
+.form-auth fieldset {
+  display: flex;
+  gap: 1.4rem;
+  margin: 0;
+  padding: 0.5rem 0.9rem 0.7rem;
+  border: 1.5px solid var(--garis);
+  border-radius: 12px;
+}
+
+.form-auth legend {
+  padding: 0 0.4rem;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.form-auth .pilihan {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.petunjuk a {
+  color: var(--merah);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  /* di HP, tombol akun sejajar dengan keranjang */
+  .akun-nama { display: none; }
+}
+
+@media (max-width: 600px) {
+  .tombol-masuk { padding: 0.5rem 0.8rem; }
+}
+
+/* =========================================================
+   16. Layar "Pesanan terkirim" di dalam keranjang
+   ========================================================= */
+.pesanan-sukses {
+  text-align: center;
+  padding: 2rem 0.5rem;
+}
+
+.pesanan-sukses p {
+  margin: 0.3rem 0;
+}
+
+.sukses-ikon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 0.8rem;
+  border-radius: 50%;
+  background: #2f7d4f;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.pesanan-sukses h3 {
+  font-size: 1.6rem;
+}
+
+.pesanan-sukses strong {
+  color: var(--cokelat);
+}
+
+.pesanan-sukses .tombol {
+  margin-top: 1.2rem;
+}

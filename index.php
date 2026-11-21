@@ -1,10 +1,17 @@
+<?php
+require_once __DIR__ . '/includes/bootstrap.php';
+
+$userSekarang = data_publik(pengguna_sekarang());
+$daftarProduk = db()->query('SELECT kode, nama, deskripsi, harga, satuan, gambar, lencana, gambar_penuh FROM produk WHERE aktif = 1 ORDER BY urutan, id')->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zona Telur - Telur Asin dan Telur Pindang Otentik</title>
-  <meta name="description" content="Zona Telur menjual telur asin, telur pindang, dan telur mentah di Narmada, Lombok. Pesan online lewat WhatsApp.">
+  <meta name="description" content="Zona Telur menjual telur asin, telur pindang, dan telur mentah di Narmada, Lombok. Pesan online langsung dari web.">
+  <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
   <link rel="icon" type="image/png" href="Assets/favicon.png">
 
   <!-- Font Google: Baloo 2 (judul) dan DM Sans (isi) -->
@@ -13,20 +20,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+  <script>window.ZT_USER = <?= json_encode($userSekarang, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
+  <script src="api.js" defer></script>
   <script src="script.js" defer></script>
+  <script src="auth.js" defer></script>
 </head>
 <body>
-
-  <!-- ========== BAR ATAS ========== -->
-  <div class="pengumuman"> Pesan lewat WhatsApp &middot; Telur asin dan pindang siap santap</div>
-
-  <div class="topbar">
-    <div> ZONA TELUR </div>
-    <div class="topbar-kanan">
-      <a href="https://wa.me/6289529399731" target="_blank" rel="noopener">☎ 0895-2939-9731</a>
-      <a href="https://instagram.com/zona.telur" target="_blank" rel="noopener">📷 @zona.telur</a>
-    </div>
-  </div>
 
   <!-- ========== HEADER ========== -->
   <header>
@@ -45,6 +44,23 @@
       <a href="#lokasi">LOKASI</a>
     </nav>
 
+    <!-- Akun: tombol Masuk (tamu) atau menu pengguna (sudah login) -->
+    <div class="akun">
+      <button type="button" class="tombol-masuk" id="tombolMasuk">👤 Masuk</button>
+
+      <div class="akun-menu" id="akunMenu" hidden>
+        <button type="button" class="akun-chip" id="akunChip" aria-haspopup="true" aria-expanded="false">
+          <span class="akun-avatar" id="akunAvatar">?</span>
+          <span class="akun-nama" id="akunNama">Nama</span>
+          <span class="lencana-peran" id="akunPeran">Member</span>
+        </button>
+        <div class="akun-dropdown" id="akunDropdown" hidden>
+          <a href="member.php" id="linkDashboard">📊 Dashboard</a>
+          <button type="button" id="tombolKeluar">Keluar</button>
+        </div>
+      </div>
+    </div>
+
     <button class="tombol-keranjang" id="tombolKeranjang" aria-label="Buka keranjang">
       🧺 Keranjang <span class="jumlah-keranjang" id="jumlahKeranjang">0</span>
     </button>
@@ -58,7 +74,7 @@
         <div class="label">Dari Narmada, Lombok</div>
         <h1>Telur asin &amp; pindang <em>otentik</em>, siap santap.</h1>
         <p>Gurih, bumbunya meresap, dikemas praktis dalam mika. Cocok untuk lauk sehari-hari,
-           bekal, maupun acara keluarga. Pesan lewat web, selesai di WhatsApp.</p>
+           bekal, maupun acara keluarga. Pesan langsung lewat web, kami konfirmasi lewat WhatsApp.</p>
 
         <div class="hero-tombol">
           <a class="tombol" href="#menu">PESAN SEKARANG</a>
@@ -84,21 +100,22 @@
       <div class="judul-seksi">
         <div class="label">Pilihan kami</div>
         <h2>Menu Zona Telur</h2>
-        <p>Pilih jumlahnya, masukkan ke keranjang, lalu kirim pesanan ke WhatsApp kami.</p>
+        <p>Pilih jumlahnya, masukkan ke keranjang, lalu kirim pesanan langsung dari web ini.</p>
       </div>
 
       <div class="grid-menu">
-
-        <!-- Kartu 1: Telur Pindang -->
-        <article class="kartu-menu" data-id="pindang" data-nama="Telur Pindang" data-harga="12000" data-satuan="mika" data-gambar="Assets/telur-pindang.jpg">
+<?php foreach ($daftarProduk as $p): ?>
+        <article class="kartu-menu" data-id="<?= e($p['kode']) ?>" data-nama="<?= e($p['nama']) ?>" data-harga="<?= (int) $p['harga'] ?>" data-satuan="<?= e($p['satuan']) ?>" data-gambar="<?= e($p['gambar']) ?>">
           <div class="menu-foto">
-            <img src="Assets/telur-pindang.jpg" alt="Telur pindang">
-            <span class="lencana">Favorit</span>
+            <img<?= $p['gambar_penuh'] ? ' class="isi-penuh"' : '' ?> src="<?= e($p['gambar']) ?>" alt="<?= e($p['nama']) ?>">
+<?php if ($p['lencana']): ?>
+            <span class="lencana"><?= e($p['lencana']) ?></span>
+<?php endif; ?>
           </div>
           <div class="menu-isi">
-            <h3>Telur Pindang</h3>
-            <p>Bumbu meresap hingga ke dalam, gurih dan wangi rempah. Mika isi 3 butir.</p>
-            <div class="harga">Rp12.000 <small>/ mika</small></div>
+            <h3><?= e($p['nama']) ?></h3>
+            <p><?= e($p['deskripsi']) ?></p>
+            <div class="harga"><?= e(rupiah((int) $p['harga'])) ?> <small>/ <?= e($p['satuan']) ?></small></div>
             <div class="menu-aksi">
               <div class="qty">
                 <button type="button" class="kurang" aria-label="Kurangi">−</button>
@@ -109,47 +126,7 @@
             </div>
           </div>
         </article>
-
-        <!-- Kartu 2: Telur Asin -->
-        <article class="kartu-menu" data-id="asin" data-nama="Telur Asin" data-harga="13000" data-satuan="mika" data-gambar="Assets/telur-asin.jpg">
-          <div class="menu-foto">
-            <img src="Assets/telur-asin.jpg" alt="Telur asin">
-          </div>
-          <div class="menu-isi">
-            <h3>Telur Asin</h3>
-            <p>Asin gurih merata dengan kuning telur berminyak. Mika isi 3 butir.</p>
-            <div class="harga">Rp13.000 <small>/ mika</small></div>
-            <div class="menu-aksi">
-              <div class="qty">
-                <button type="button" class="kurang" aria-label="Kurangi">−</button>
-                <span class="angka">1</span>
-                <button type="button" class="tambah" aria-label="Tambah">+</button>
-              </div>
-              <button type="button" class="tombol masuk-keranjang">+ KERANJANG</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Kartu 3: Telur Mentah -->
-        <article class="kartu-menu" data-id="mentah" data-nama="Telur Mentah" data-harga="50000" data-satuan="butir" data-gambar="Assets/telur-mentah.jpg">
-          <div class="menu-foto">
-            <img class="isi-penuh" src="Assets/telur-mentah.jpg" alt="Telur mentah dalam tray">
-          </div>
-          <div class="menu-isi">
-            <h3>Telur Mentah</h3>
-            <p>Telur ayam segar untuk kebutuhan dapur, kue, atau usaha kuliner.</p>
-            <div class="harga">Rp50.000 <small>/ butir</small></div>
-            <div class="menu-aksi">
-              <div class="qty">
-                <button type="button" class="kurang" aria-label="Kurangi">−</button>
-                <span class="angka">1</span>
-                <button type="button" class="tambah" aria-label="Tambah">+</button>
-              </div>
-              <button type="button" class="tombol masuk-keranjang">+ KERANJANG</button>
-            </div>
-          </div>
-        </article>
-
+<?php endforeach; ?>
       </div>
     </section>
 
@@ -163,8 +140,8 @@
       <ol class="langkah">
         <li><span>1</span><h3>Pilih produk</h3><p>Tentukan telur pindang, telur asin, atau telur mentah dan jumlahnya.</p></li>
         <li><span>2</span><h3>Isi data pesanan</h3><p>Nama, nomor WhatsApp, ambil atau antar, dan metode pembayaran.</p></li>
-        <li><span>3</span><h3>Kirim ke WhatsApp</h3><p>Pesanan tersusun otomatis di chat. Tinggal tekan kirim.</p></li>
-        <li><span>4</span><h3>Konfirmasi &amp; bayar</h3><p>Admin konfirmasi stok dan total. Bayar via QRIS atau tunai.</p></li>
+        <li><span>3</span><h3>Kirim pesanan</h3><p>Pesanan langsung tercatat di sistem kami. Tinggal tekan kirim.</p></li>
+        <li><span>4</span><h3>Konfirmasi &amp; bayar</h3><p>Admin menghubungi lewat WhatsApp untuk konfirmasi. Bayar via QRIS atau tunai.</p></li>
         <li><span>5</span><h3>Terima pesanan</h3><p>Ambil di tempat atau diantar sesuai pilihanmu.</p></li>
       </ol>
     </section>
@@ -241,6 +218,16 @@
       <!-- Daftar barang diisi oleh script.js -->
       <div id="daftarBarang"></div>
 
+      <!-- Tampilan setelah pesanan berhasil dikirim -->
+      <div id="pesananSukses" class="pesanan-sukses" hidden>
+        <div class="sukses-ikon" aria-hidden="true">✓</div>
+        <h3>Pesanan terkirim!</h3>
+        <p>Kode pesanan: <strong id="suksesKode"></strong></p>
+        <p>Total: <strong id="suksesTotal"></strong></p>
+        <p class="petunjuk" id="suksesInfo"></p>
+        <button type="button" class="tombol lebar" id="pesanLagi">PESAN LAGI</button>
+      </div>
+
       <form id="formPesan" class="form-pesan" novalidate>
         <div class="total"><span>Total</span><strong id="totalHarga">Rp0</strong></div>
 
@@ -273,11 +260,63 @@
         </label>
 
         <p class="pesan-error" id="pesanError" role="alert"></p>
-        <button type="submit" class="tombol lebar">KIRIM PESANAN VIA WHATSAPP</button>
-        <p class="petunjuk">Pesanan dianggap pasti setelah dikonfirmasi admin di WhatsApp.</p>
+        <button type="submit" class="tombol lebar">KIRIM PESANAN</button>
+        <p class="petunjuk">Pesanan dianggap pasti setelah dikonfirmasi admin lewat WhatsApp.</p>
       </form>
     </div>
   </aside>
+
+  <!-- ========== MODAL LOGIN / DAFTAR ========== -->
+  <div class="modal" id="modalAuth" hidden>
+    <div class="modal-kotak" role="dialog" aria-modal="true" aria-labelledby="judulAuth">
+      <button type="button" class="tombol-tutup modal-tutup" data-tutup-modal aria-label="Tutup">✕</button>
+
+      <img src="Assets/logo.png" alt="" class="modal-logo" width="64" height="64">
+      <h2 id="judulAuth">Masuk ke Zona Telur</h2>
+
+      <div class="tab-auth" role="tablist">
+        <button type="button" role="tab" class="aktif" id="tabMasuk" aria-selected="true">Masuk</button>
+        <button type="button" role="tab" id="tabDaftar" aria-selected="false">Daftar Member</button>
+      </div>
+
+      <!-- Form Masuk -->
+      <form id="formMasuk" class="form-auth" novalidate>
+        <label>Email atau username
+          <input type="text" id="masukId" autocomplete="username" required>
+        </label>
+        <label>Kata sandi
+          <input type="password" id="masukSandi" autocomplete="current-password" required>
+        </label>
+
+        <p class="pesan-error" id="errorMasuk" role="alert"></p>
+        <button type="submit" class="tombol lebar">MASUK</button>
+        <p class="petunjuk">Belum punya akun? <a href="#" id="keDaftar">Daftar sebagai member</a></p>
+      </form>
+
+      <!-- Form Daftar -->
+      <form id="formDaftar" class="form-auth" novalidate hidden>
+        <label>Nama lengkap
+          <input type="text" id="daftarNama" autocomplete="name" required>
+        </label>
+        <label>Email
+          <input type="email" id="daftarEmail" autocomplete="email" placeholder="nama@email.com" required>
+        </label>
+        <label>Nomor WhatsApp
+          <input type="tel" id="daftarTelepon" autocomplete="tel" inputmode="tel" placeholder="08xxxxxxxxxx" required>
+        </label>
+        <label>Kata sandi
+          <input type="password" id="daftarSandi" autocomplete="new-password" placeholder="Minimal 6 karakter" required>
+        </label>
+        <label>Ulangi kata sandi
+          <input type="password" id="daftarSandi2" autocomplete="new-password" required>
+        </label>
+
+        <p class="pesan-error" id="errorDaftar" role="alert"></p>
+        <button type="submit" class="tombol lebar">DAFTAR SEKARANG</button>
+        <p class="petunjuk">Sudah punya akun? <a href="#" id="keMasuk">Masuk di sini</a></p>
+      </form>
+    </div>
+  </div>
 
   <!-- Notifikasi kecil di bawah layar -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>

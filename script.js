@@ -1,10 +1,9 @@
 // =========================================================
 // Zona Telur - script.js
 // Materi yang dipakai: variabel (const/let), array, fungsi,
-// DOM, event (addEventListener), if/else, loop, template string
+// DOM, event (addEventListener), if/else, loop, template string,
+// fetch (mengirim pesanan ke server PHP)
 // =========================================================
-
-const NOMOR_WA = "6289529399731"; // format internasional, tanpa tanda +
 
 // Keranjang disimpan dalam array. Setiap barang berbentuk:
 // { id, nama, harga, satuan, gambar, jumlah }
@@ -216,8 +215,9 @@ pilihanAmbil.forEach(function (radio) {
   });
 });
 
-// ---------- 7. Kirim pesanan ke WhatsApp ----------
-formPesan.addEventListener("submit", function (e) {
+// ---------- 7. Kirim pesanan ke server ----------
+
+formPesan.addEventListener("submit", async function (e) {
   e.preventDefault(); // cegah halaman reload
 
   const nama = document.getElementById("nama");
@@ -259,31 +259,79 @@ formPesan.addEventListener("submit", function (e) {
     return;
   }
 
-  // --- Menyusun pesan WhatsApp ---
-  let pesan = "Halo Zona Telur, saya ingin memesan:\n\n";
-  for (let i = 0; i < keranjang.length; i++) {
-    const b = keranjang[i];
-    pesan += `${i + 1}. ${b.nama} x${b.jumlah} ${b.satuan} = ${formatRupiah(b.harga * b.jumlah)}\n`;
-  }
-  pesan += `\nTotal: ${formatRupiah(hitungTotal())}\n\n`;
-  pesan += `Nama: ${nama.value.trim()}\n`;
-  pesan += `No. WA: ${telepon.value.trim()}\n`;
-  pesan += `Pengambilan: ${ambil}\n`;
-  if (ambil === "Diantar") {
-    pesan += `Alamat: ${alamat.value.trim()}\n`;
-  }
-  pesan += `Pembayaran: ${bayar}\n`;
-  if (catatan.value.trim() !== "") {
-    pesan += `Catatan: ${catatan.value.trim()}\n`;
-  }
-  pesan += "\nTerima kasih.";
+  // --- Kirim ke server (harga dihitung ulang oleh server dari database) ---
+  const tombolKirim = formPesan.querySelector('button[type="submit"]');
+  tombolKirim.disabled = true;
+  tombolKirim.textContent = "MENGIRIM...";
 
-  // encodeURIComponent mengubah teks agar aman dipakai di alamat URL
-  const url = "https://wa.me/" + NOMOR_WA + "?text=" + encodeURIComponent(pesan);
-  window.open(url, "_blank", "noopener");
+  try {
+    const hasil = await api("api/pesan.php", {
+      nama: nama.value.trim(),
+      telepon: telepon.value.trim(),
+      ambil: ambil,
+      alamat: ambil === "Diantar" ? alamat.value.trim() : "",
+      bayar: bayar,
+      catatan: catatan.value.trim(),
+      items: keranjang.map(function (b) {
+        return { id: b.id, jumlah: b.jumlah };
+      }),
+    });
 
-  tampilkanToast("WhatsApp dibuka. Tekan kirim di sana.");
+    tampilkanSukses(hasil);
+    keranjang = [];
+    tampilkanKeranjang();
+    formPesan.reset();
+    barisAlamat.hidden = true;
+    isiDataMember(); // member: isi lagi nama & nomor untuk pesanan berikutnya
+  } catch (err) {
+    pesanError.textContent = err.message;
+  } finally {
+    tombolKirim.disabled = false;
+    tombolKirim.textContent = "KIRIM PESANAN";
+  }
+});
+
+// ---------- 8. Tampilan "Pesanan terkirim" ----------
+const pesananSukses = document.getElementById("pesananSukses");
+
+function tampilkanSukses(hasil) {
+  document.getElementById("suksesKode").textContent = hasil.kode;
+  document.getElementById("suksesTotal").textContent = formatRupiah(hasil.total);
+  document.getElementById("suksesInfo").textContent = hasil.member
+    ? "Admin akan menghubungi lewat WhatsApp. Pantau statusnya dan kumpulkan poin di Dashboard."
+    : "Admin akan menghubungi lewat WhatsApp untuk konfirmasi. Simpan kode pesanan ini.";
+  daftarBarang.hidden = true;
+  formPesan.hidden = true;
+  pesananSukses.hidden = false;
+}
+
+function kembaliKeFormPesan() {
+  pesananSukses.hidden = true;
+  daftarBarang.hidden = false;
+  formPesan.hidden = false;
+}
+
+document.getElementById("pesanLagi").addEventListener("click", function () {
+  kembaliKeFormPesan();
+  tutupPanel();
+  document.getElementById("menu").scrollIntoView();
+});
+
+// Isi nama & nomor WhatsApp otomatis untuk member yang sedang login
+function isiDataMember() {
+  const user = window.ZT_USER;
+  if (!user || user.peran !== "member") return;
+  const nama = document.getElementById("nama");
+  const telepon = document.getElementById("telepon");
+  if (nama.value === "") nama.value = user.nama;
+  if (telepon.value === "") telepon.value = user.telepon;
+}
+
+// Buka keranjang lagi -> pastikan yang tampil formulir (bukan layar sukses)
+tombolKeranjang.addEventListener("click", function () {
+  if (!pesananSukses.hidden && keranjang.length > 0) kembaliKeFormPesan();
 });
 
 // Tampilan awal keranjang
 tampilkanKeranjang();
+isiDataMember();

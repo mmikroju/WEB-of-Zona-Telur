@@ -1,0 +1,446 @@
+/* =========================================================
+   Zona Telur - dash.css
+   Gaya untuk halaman dashboard (dipakai bersama style.css)
+   ========================================================= */
+
+:root {
+  --hijau: #2f7d4f;
+}
+
+.dash-bar .brand-teks small {
+  color: var(--merah);
+}
+
+.dash-aksi {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.dash-aksi .tombol {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.8rem;
+}
+
+.dash {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2rem 5vw 4rem;
+}
+
+.dash-sapa h1 {
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  margin-bottom: 0.2rem;
+}
+
+.dash-sapa p {
+  margin: 0 0 1.6rem;
+  color: var(--teks-lembut);
+}
+
+/* Kartu statistik */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.stat-grid.tiga {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.stat {
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+}
+
+.stat span {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teks-lembut);
+}
+
+.stat strong {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  color: var(--cokelat);
+}
+
+.stat.sorot {
+  border-color: var(--oranye);
+  background: #fff3de;
+}
+
+/* Tab */
+.tab-bar {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+  padding: 0.25rem;
+  width: fit-content;
+  max-width: 100%;
+  background: var(--krem-tua);
+  border-radius: 999px;
+}
+
+.tab-bar button {
+  border: 0;
+  background: none;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  font: 700 0.88rem "DM Sans", sans-serif;
+  color: var(--teks-lembut);
+  cursor: pointer;
+}
+
+.tab-bar button.aktif {
+  background: var(--cokelat);
+  color: #fff;
+}
+
+/* Kotak isi */
+.panel {
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 18px;
+  padding: 1.3rem;
+  margin-bottom: 1.2rem;
+}
+
+.panel h2 {
+  font-size: 1.3rem;
+}
+
+.panel-kepala {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.panel-kepala h2 {
+  margin: 0;
+}
+
+.dua-kolom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+select,
+.dash input[type="text"],
+.dash input[type="tel"],
+.dash input[type="email"],
+.dash input[type="password"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+  color: var(--teks);
+  border: 1.5px solid var(--garis);
+  border-radius: 12px;
+  font: 400 0.95rem "DM Sans", sans-serif;
+}
+
+select {
+  width: auto;
+  cursor: pointer;
+}
+
+select:hover,
+.dash input:hover {
+  border-color: var(--oranye);
+}
+
+.dash input[readonly] {
+  background: var(--krem-tua);
+  color: var(--teks-lembut);
+}
+
+/* Tabel */
+.tabel-bungkus {
+  overflow-x: auto;
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.tabel {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tabel th,
+.tabel td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--garis);
+}
+
+.tabel th {
+  background: var(--krem-tua);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tabel tr:last-child td {
+  border-bottom: 0;
+}
+
+.tabel small {
+  display: block;
+  color: var(--teks-lembut);
+}
+
+.tabel .nowrap {
+  white-space: nowrap;
+}
+
+.kosong-tabel {
+  text-align: center !important;
+  color: var(--teks-lembut);
+  padding: 1.6rem !important;
+}
+
+/* Lencana status */
+.status {
+  display: inline-block;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.status-baru { background: var(--oranye); color: var(--gelap); }
+.status-diproses { background: var(--cokelat); }
+.status-selesai { background: var(--hijau); }
+.status-dibatalkan { background: #9a8a7a; }
+
+.tombol-hapus {
+  background: none;
+  border: 1.5px solid var(--merah);
+  color: var(--merah);
+  border-radius: 999px;
+  padding: 0.2rem 0.8rem;
+  font: 700 0.78rem "DM Sans", sans-serif;
+  cursor: pointer;
+}
+
+.tombol-hapus:hover {
+  background: var(--merah);
+  color: #fff;
+}
+
+/* Produk terlaris */
+.bar-baris {
+  display: grid;
+  gap: 0.2rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.bar-baris div:first-child {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.bar-jalur {
+  height: 10px;
+  background: var(--krem-tua);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-isi {
+  height: 100%;
+  background: var(--oranye);
+  border-radius: 999px;
+}
+
+/* Kartu pesanan (member) */
+.daftar-pesanan {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.pesanan {
+  background: #fff;
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+}
+
+.pesanan-atas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pesanan-atas small {
+  color: var(--teks-lembut);
+}
+
+.pesanan ul {
+  margin: 0 0 0.6rem;
+  padding-left: 1.1rem;
+  font-size: 0.92rem;
+}
+
+.pesanan-bawah {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--teks-lembut);
+}
+
+.pesanan-bawah strong {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.2rem;
+  color: var(--cokelat);
+}
+
+.kosong-blok {
+  text-align: center;
+  color: var(--teks-lembut);
+  padding: 2rem 1rem;
+}
+
+/* Form profil */
+.form-dash {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.form-dash label {
+  display: grid;
+  gap: 0.3rem;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.form-dash .tombol {
+  justify-self: start;
+}
+
+@media (max-width: 860px) {
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .dua-kolom { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .stat-grid.tiga { grid-template-columns: 1fr; }
+  .dash-aksi .tombol.garis { display: none; }
+}
+
+/* Batalkan padding umum "main > section" dari style.css untuk panel tab */
+.dash > .tab-panel {
+  padding: 0;
+}
+
+/* Status penukaran poin */
+.status-diajukan { background: var(--oranye); color: var(--gelap); }
+.status-ditolak { background: #9a8a7a; }
+
+/* Poin (member) */
+.poin-besar {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.poin-besar strong {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--cokelat);
+}
+
+.poin-besar span {
+  font-weight: 700;
+  color: var(--teks-lembut);
+}
+
+.aturan {
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--teks-lembut);
+}
+
+.catatan-poin {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cokelat);
+}
+
+.pilih-bonus {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.bonus {
+  display: grid;
+  gap: 0.2rem;
+  justify-items: center;
+  text-align: center;
+  padding: 0.7rem;
+  background: #fff;
+  border: 1.5px solid var(--garis);
+  border-radius: 14px;
+  font: 500 0.82rem "DM Sans", sans-serif;
+  color: var(--teks-lembut);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.bonus img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.bonus b {
+  font-size: 0.95rem;
+  color: var(--teks);
+}
+
+.bonus:hover:not(:disabled) {
+  border-color: var(--oranye);
+  transform: translateY(-2px);
+}
+
+.bonus:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tautan-wa {
+  color: var(--merah);
+  font-weight: 700;
+}
